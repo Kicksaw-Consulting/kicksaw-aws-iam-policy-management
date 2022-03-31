@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "kicksaw-aws-iam-policy-management"
+version = "0.1.0"
+description = "Provides a shell utility for managing an iam policy within your repo. Typically useful for tracking a deploy policy in your codebase and pushing updates to said policy right from your repo."
+readme = "README.md"
+repository = "https://github.com/Kicksaw-Consulting/kicksaw-aws-iam-policy-management"
+authors = ["Alex Drozd <alex@kicksaw.com>"]
+keywords = ["kicksaw", "aws", "iam", "cicd"]
+packages = [
+    { include = "kicksaw_aws_iam_policy_management" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+boto3 = "^1.17.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^20.8b1"
+moto = "^2.0.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
