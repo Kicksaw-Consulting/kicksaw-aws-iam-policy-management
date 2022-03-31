@@ -13,6 +13,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.9"
 boto3 = "^1.17.3"
+click = "^8.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -22,3 +23,6 @@ moto = "^2.0.5"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+iam-mgmt = 'kicksaw_aws_iam_policy_management.cli:main'

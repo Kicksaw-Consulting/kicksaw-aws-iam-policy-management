@@ -1,0 +1,5 @@
+# Install
+
+```
+iam-mgmt
+```
