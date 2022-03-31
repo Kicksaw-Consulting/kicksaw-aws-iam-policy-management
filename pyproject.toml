@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kicksaw-aws-iam-policy-management"
-version = "0.1.0"
+version = "0.0.1"
 description = "Provides a shell utility for managing an iam policy within your repo. Typically useful for tracking a deploy policy in your codebase and pushing updates to said policy right from your repo."
 readme = "README.md"
 repository = "https://github.com/Kicksaw-Consulting/kicksaw-aws-iam-policy-management"
