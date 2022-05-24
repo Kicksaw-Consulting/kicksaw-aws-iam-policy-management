@@ -1,0 +1,11 @@
+{
+  "namespace": "example-project",
+  "purpose": "cicd",
+  "policies": [
+    {
+      "path": "policy-deploy.json",
+      "description": "Permissions needed for deploying",
+      "purpose": "deploy"
+    }
+  ]
+}
