@@ -16,8 +16,8 @@ def test_sync_iam():
     with open("config-iam.json") as file:
         data = json.load(file)
 
-    assert data["stages"]["local"]["arn"] == USER_ARN
-    assert data["policies"][0]["stages"]["local"]["arn"] == POLICY_ARN
+    assert data["stages"]["test"]["arn"] == USER_ARN
+    assert data["policies"][0]["stages"]["test"]["arn"] == POLICY_ARN
 
     # then just make sure it runs again
     sync_iam()

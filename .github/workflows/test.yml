@@ -25,6 +25,8 @@ jobs:
       - name: Pytest
         run: |
           poetry run pytest
+        env:
+          STAGE: test
       - name: Slack Notifications
         uses: Kicksaw-Consulting/notify-slack-action@master
         if: always()
