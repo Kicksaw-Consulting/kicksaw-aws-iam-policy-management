@@ -29,7 +29,11 @@ def sync_iam():
 
     for policy in policies:
         description = policy.get("description")
-        created = bool(policy.get("arn"))
+        if "stages" not in policy:
+            policy["stages"] = dict()
+        if STAGE not in policy["stages"]:
+            policy["stages"][STAGE] = dict()
+        created = bool(policy["stages"][STAGE].get("arn"))
 
         if not created:
             path_to_policy = policy["path"]
@@ -43,7 +47,7 @@ def sync_iam():
                 Description=description,
             )
             arn = response["Policy"]["Arn"]
-            policy["arn"] = arn
+            policy["stages"][STAGE]["arn"] = arn
             policies_to_attach.append(arn)
         else:
             policies_to_update.append(policy)
@@ -64,7 +68,7 @@ def sync_iam():
     for policy_arn in policies_to_attach:
         iam.attach_user_policy(UserName=username, PolicyArn=policy_arn)
     for policy in policies_to_update:
-        policy_arn = policy["arn"]
+        policy_arn = policy["stages"][STAGE]["arn"]
         results = iam.list_policy_versions(PolicyArn=policy_arn)
         versions = results["Versions"]
         for idx, version in enumerate(versions):

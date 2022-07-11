@@ -17,7 +17,7 @@ def test_sync_iam():
         data = json.load(file)
 
     assert data["stages"]["local"]["arn"] == USER_ARN
-    assert data["policies"][0]["arn"] == POLICY_ARN
+    assert data["policies"][0]["stages"]["local"]["arn"] == POLICY_ARN
 
     # then just make sure it runs again
     sync_iam()
