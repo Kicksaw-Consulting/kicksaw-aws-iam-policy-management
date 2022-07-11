@@ -1,5 +1,8 @@
 import boto3
 import json
+import os
+
+STAGE = os.getenv("STAGE")
 
 
 def sync_iam():
@@ -7,10 +10,19 @@ def sync_iam():
 
     with open("config-iam.json") as file:
         json_data = json.load(file)
+
     namespace = json_data["namespace"]
     policies = json_data["policies"]
     iam_user_purpose = json_data["purpose"]
-    user_exists = bool(json_data.get("arn"))
+
+    stage_exists = bool(json_data.get("stages", {}).get(STAGE))
+
+    if not stage_exists:
+        if "stages" not in json_data:
+            json_data["stages"] = dict()
+        json_data["stages"][STAGE] = dict()
+
+    user_exists = bool(json_data["stages"].get(STAGE, {}).get("arn"))
 
     policies_to_attach = list()
     policies_to_update = list()
@@ -44,7 +56,7 @@ def sync_iam():
             UserName=username,
         )
         arn = response["User"]["Arn"]
-        json_data["arn"] = arn
+        json_data["stages"][STAGE]["arn"] = arn
 
         response = iam.create_access_key(UserName=username)
         access_key = response["AccessKey"]
